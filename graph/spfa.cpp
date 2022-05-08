@@ -71,6 +71,37 @@ class Spfa {
         }
 };
 
+void test_spfa_with_floyd(int N) {
+    srand(time(NULL));
+
+    vector<vector<long long>> d(N);
+    Spfa<long long> spfa(N);
+    
+    for (int i = 0; i < N; i ++) {
+        d[i].resize(N);
+        for (int j = 0; j < N; j ++) {
+            d[i][j] = rand() % 10000;
+            spfa.add_edge(i, j, d[i][j]);
+        }
+        d[i][i] = 0;
+    }
+
+    for (int k = 0; k < N; k ++)
+        for (int i = 0; i < N; i ++)
+            for (int j = 0; j < N; j ++)
+                if (d[i][j] > d[i][k] + d[k][j]) d[i][j] = d[i][k] + d[k][j];
+
+    for (int start = 0; start < N; start ++) {
+        spfa.calculate(start);
+        for (int end = 0; end < N; end ++)
+            if (spfa.distance[end] != d[start][end]) {
+                throw runtime_error("Test failed!");
+            }
+    }
+}
+
 int main() {
+    test_spfa_with_floyd(300);
+    cout<<"Test Passed!"<<endl;
     return 0;
 }

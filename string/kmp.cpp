@@ -16,7 +16,7 @@ public:
     
     // Returns first matching start index of t in s.
     // If no match returns -1.
-    int indexIn(string s) {
+    int index_in(string s) {
         int j = -1; // Matching position in t.
         for (int i = 0; i < s.size(); i ++) {
             while (j >= 0 && s[i] != t[j + 1]) j = jump[j];
@@ -40,7 +40,7 @@ private:
 
 void test_kmp(string s, string t) {
     Kmp kmp(t);
-    cout<<kmp.indexIn(s)<<endl;
+    cout<<kmp.index_in(s)<<endl;
 }
 
 int main() {

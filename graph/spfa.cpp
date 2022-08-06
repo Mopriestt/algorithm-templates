@@ -68,9 +68,9 @@ private:
         }
     }
 
-    void index_sanity_check(int index, string where) {
-        if (index >= n) throw std::overflow_error(where + ": index >= n");
-        if (index < 0) throw std::overflow_error(where + ": index < 0");
+    inline void index_sanity_check(int index, string where) {
+        if (index >= n) throw std::overflow_error(where + ":" + index + " >= n");
+        if (index < 0) throw std::overflow_error(where + ":" + index + " < 0");
     }
 };
 

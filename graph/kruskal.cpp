@@ -12,25 +12,26 @@ public:
 	int n;
 	vector<int> father; // Disjoint-set
 	Kruskal(int n) {
+	    this->n = n;
 		father.resize(n);
 		for (int i = 0; i < n; i++) father[i] = i;
 	}
-	void add_edge(int u, int v, T value) {
-		index_sanity_check(u, "add_edge");
-		index_sanity_check(v, "add_edge");
+	void AddEdge(int u, int v, T value) {
+		IndexSanityCheck(u, "AddEdge");
+		IndexSanityCheck(v, "AddEdge");
 		edges.push_back(make_pair(value, make_pair(u, v)));
 	}
 
-	T calculate() {
+	T Calculate() {
 		// Change ans type if the result will overflow.
 		T ans = 0;
-		// Change comparator to calculate maximum spanning forest.
+		// Change comparator to Calculate maximum spanning forest.
 		sort(edges.begin(), edges.end());
 
 		for (auto e : edges) {
-			if (find(e.second.first) != find(e.second.second)) {
+			if (Find(e.second.first) != Find(e.second.second)) {
 				ans += e.first;
-				merge(e.second.first, e.second.second);
+				Merge(e.second.first, e.second.second);
 			}
 		}
 
@@ -39,34 +40,34 @@ public:
 private:
 	vector<pair<T, pair<int, int>>> edges;
 
-	inline void merge(int u, int v) {
-		father[find(u)] = father[v];
+	inline void Merge(int u, int v) {
+		father[Find(u)] = father[v];
 	}
 
-	int find(int u) {
-		if (father[u] != u) father[u] = find(father[u]);
+	int Find(int u) {
+		if (father[u] != u) father[u] = Find(father[u]);
 		return father[u];
 	}
 
-	inline void index_sanity_check(int index, string where) {
+	inline void IndexSanityCheck(int index, string where) {
 		if (index >= n) throw overflow_error(where + ": index >= n");
 		if (index < 0) throw overflow_error(where + ": index < 0");
 	}
 };
 
-void simple_test_kruskal() {
+void SimpleTestKruskal() {
 	Kruskal<int> kruskal(5);
-	kruskal.add_edge(0, 1, 1);
-	kruskal.add_edge(1, 2, 2);
-	kruskal.add_edge(2, 3, 3);
-	kruskal.add_edge(3, 4, 5);
-	kruskal.add_edge(0, 5, 6);
-	kruskal.add_edge(0, 3, 3);
-	kruskal.add_edge(3, 1, 4);
-	cout << kruskal.calculate() << endl;
+	kruskal.AddEdge(0, 1, 1);
+	kruskal.AddEdge(1, 2, 2);
+	kruskal.AddEdge(2, 3, 3);
+	kruskal.AddEdge(3, 4, 5);
+	kruskal.AddEdge(0, 4, 6);
+	kruskal.AddEdge(0, 3, 3);
+	kruskal.AddEdge(3, 1, 4);
+	cout << kruskal.Calculate() << endl;
 }
 
 int main() {
-	simple_test_kruskal();
+	SimpleTestKruskal();
 	return 0;
 }

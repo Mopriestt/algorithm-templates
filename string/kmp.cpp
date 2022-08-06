@@ -11,12 +11,12 @@ public:
     Kmp(string t) {
         this -> t = t;
         jump.resize(t.size());
-        calc_jump(t);
+        CalcJump(t);
     }
     
     // Returns first matching start index of t in s.
     // If no match returns -1.
-    int index_in(string s) {
+    int IndexIn(string s) {
         int j = -1; // Matching position in t.
         for (int i = 0; i < s.size(); i ++) {
             while (j >= 0 && s[i] != t[j + 1]) j = jump[j];
@@ -27,7 +27,7 @@ public:
     }
     
 private:
-    void calc_jump(string s) {
+    void CalcJump(string s) {
         jump[0] = -1;
         int match = -1;
         for (int i = 1; i < t.length(); i ++) {
@@ -38,9 +38,9 @@ private:
     }
 };
 
-void test_kmp(string s, string t) {
+void TestKmp(string s, string t) {
     Kmp kmp(t);
-    cout<<kmp.index_in(s)<<endl;
+    cout<<kmp.IndexIn(s)<<endl;
 }
 
 int main() {
@@ -49,9 +49,9 @@ int main() {
     s += 'b';
     for (int i = 0; i < 10000; i ++) t += 'a';
     t += 'b';
-    test_kmp(s, t);
+    TestKmp(s, t);
     
-    test_kmp("mississippi", "issip");
+    TestKmp("mississippi", "issip");
 
     return 0;
 }

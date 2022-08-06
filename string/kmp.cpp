@@ -6,17 +6,17 @@ using namespace std;
 
 class Kmp {
 public:
-    string s;
+    string t;
     vector<int> jump;
-    Kmp(string s) {
-        this -> s = s;
-        jump.resize(s.size());
-        calc_jump(s);
+    Kmp(string t) {
+        this -> t = t;
+        jump.resize(t.size());
+        calc_jump(t);
     }
     
-    // Returns first matching start index.
+    // Returns first matching start index of t in s.
     // If no match returns -1.
-    int contains(string t) {
+    int indexIn(string s) {
         int j = -1; // Matching position in t.
         for (int i = 0; i < s.size(); i ++) {
             while (j >= 0 && s[i] != t[j + 1]) j = jump[j];
@@ -30,17 +30,17 @@ private:
     void calc_jump(string s) {
         jump[0] = -1;
         int match = -1;
-        for (int i = 1; i < s.length(); i ++) {
-            while (match >= 0 && s[i] != s[match + 1]) match = jump[match];
-            if (s[i] == s[match + 1]) ++ match;
+        for (int i = 1; i < t.length(); i ++) {
+            while (match >= 0 && t[i] != t[match + 1]) match = jump[match];
+            if (t[i] == t[match + 1]) ++ match;
             jump[i] = match;
         }
     }
 };
 
 void test_kmp(string s, string t) {
-    Kmp kmp(s);
-    cout<<kmp.contains(t)<<endl;
+    Kmp kmp(t);
+    cout<<kmp.indexIn(s)<<endl;
 }
 
 int main() {
@@ -50,6 +50,8 @@ int main() {
     for (int i = 0; i < 10000; i ++) t += 'a';
     t += 'b';
     test_kmp(s, t);
+    
+    test_kmp("mississippi", "issip");
 
     return 0;
 }

@@ -53,7 +53,7 @@ private:
     void Float(int pos) {
         while (pos > 0 && arr[pos] < arr[(pos - 1) >> 1]) {
             swap(arr[pos], arr[(pos - 1) >> 1]);
-            pos = pos - 1 >> 1;
+            pos = (pos - 1) >> 1;
         }
     }
 };

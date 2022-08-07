@@ -12,14 +12,18 @@ public:
         return arr.size();
     }
 
+    Heap(bool is_min_heap = true) {
+        symbol = is_min_heap ? 1 : -1;
+    }
+
     T Top() {
         if (arr.size() == 0) throw overflow_error("Topping on empty heap.");
-        return arr[0];
+        return arr[0] * symbol;
     }
 
     T Pop() {
         if (arr.size() == 0) throw overflow_error("Popping on empty heap.");
-        T ret = arr[0];
+        T ret = arr[0] * symbol;
         arr[0] = *--arr.end();
         arr.pop_back();
         Sink(0);
@@ -27,10 +31,11 @@ public:
     }
 
     void Add(T x) {
-        arr.push_back(x);
+        arr.push_back(x * symbol);
         Float(arr.size() - 1);
     }
 private:
+    short symbol;
     vector<T> arr;
 
     inline bool Greater(int a, int b) {
@@ -60,18 +65,18 @@ private:
 
 void TestHeap(int n) {
     srand(time(NULL));
-    vector<int> a(n);
-    Heap<int> heap;
+    vector<double> a(n);
+    Heap<double> heap(false);
 
     for (int i = 0; i < n; i ++) {
-        int x = rand();
+        int x = double(rand()) / double(rand());
         a[i] = x;
         heap.Add(x);
     }
     sort(a.begin(), a.end());
 
     for (int i = 0; i < n; i ++) {
-        if (a[i] != heap.Pop()) {
+        if (a[n - i - 1] != heap.Pop()) {
             cout<<"Test Failed"<<endl;
             return;
         }

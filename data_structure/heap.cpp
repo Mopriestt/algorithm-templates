@@ -8,7 +8,7 @@ template <typename T>
 
 class Heap {
 public:
-    inline int Size() {
+    inline int size() {
         return arr.size();
     }
 
@@ -16,36 +16,36 @@ public:
         symbol = is_min_heap ? 1 : -1;
     }
 
-    T Top() {
+    T top() {
         if (arr.size() == 0) throw overflow_error("Topping on empty heap.");
         return arr[0] * symbol;
     }
 
-    T Pop() {
+    T pop() {
         if (arr.size() == 0) throw overflow_error("Popping on empty heap.");
         T ret = arr[0] * symbol;
         arr[0] = *--arr.end();
         arr.pop_back();
-        Sink(0);
+        sink(0);
         return ret;
     }
 
-    void Add(T x) {
+    void add(T x) {
         arr.push_back(x * symbol);
-        Float(arr.size() - 1);
+        _float(arr.size() - 1);
     }
 private:
     short symbol;
     vector<T> arr;
 
-    inline bool Greater(int a, int b) {
+    inline bool greater(int a, int b) {
         if (b >= arr.size()) return false;
         return arr[a] > arr[b];
     }
 
-    void Sink(int pos) {
-        while (Greater(pos, pos * 2 + 1) || Greater(pos, pos * 2 + 2)) {
-            if (Greater(pos * 2 + 1, pos * 2 + 2)) {
+    void sink(int pos) {
+        while (greater(pos, pos * 2 + 1) || greater(pos, pos * 2 + 2)) {
+            if (greater(pos * 2 + 1, pos * 2 + 2)) {
                 swap(arr[pos], arr[pos * 2 + 2]);
                 pos = pos * 2 + 2;
             } else {
@@ -55,7 +55,7 @@ private:
         }
     }
 
-    void Float(int pos) {
+    void _float(int pos) {
         while (pos > 0 && arr[pos] < arr[(pos - 1) >> 1]) {
             swap(arr[pos], arr[(pos - 1) >> 1]);
             pos = (pos - 1) >> 1;
@@ -71,12 +71,12 @@ void TestHeap(int n) {
     for (int i = 0; i < n; i ++) {
         int x = double(rand()) / double(rand());
         a[i] = x;
-        heap.Add(x);
+        heap.add(x);
     }
     sort(a.begin(), a.end());
 
     for (int i = 0; i < n; i ++) {
-        if (a[n - i - 1] != heap.Pop()) {
+        if (a[n - i - 1] != heap.pop()) {
             cout<<"Test Failed"<<endl;
             return;
         }

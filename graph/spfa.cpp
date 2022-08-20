@@ -11,10 +11,10 @@ template <typename T>
  * AKA Shortest-Path-Fast-Algorithm.
  * To use:
  * Spfa<Type> spfa(node_count);
- * spfa.AddEdge(a1, b1, c1);
- * spfa.AddEdge(a2, b2, c2);
+ * spfa.add_edge(a1, b1, c1);
+ * spfa.add_edge(a2, b2, c2);
  * ...
- * spfa.Calculate(start_node_index);
+ * spfa.calculate(start_node_index);
  * result = spfa.distance
  */
 class Spfa {
@@ -33,16 +33,16 @@ public:
         edges.resize(n);
     }
 
-    void AddEdge(int start, int end, T length) {
-        IndexSanityCheck(start, "AddEdge");
-        IndexSanityCheck(end, "AddEdge");
+    void add_edge(int start, int end, T length) {
+        index_sanity_check(start, "add_edge");
+        index_sanity_check(end, "add_edge");
 
         edges[start].push_back(make_pair(end, length));
         if (undirected) edges[end].push_back(make_pair(start, length));
     }
 
-    void Calculate(int start) {
-        IndexSanityCheck(start, "Calculate");
+    void calculate(int start) {
+        index_sanity_check(start, "Calculate");
 
         while (!q.empty()) q.pop();
         for (int i = 0; i < n; i++) visited[i] = false;
@@ -68,7 +68,7 @@ private:
         }
     }
 
-    inline void IndexSanityCheck(int index, string where) {
+    inline void index_sanity_check(int index, string where) {
         if (index >= n) throw overflow_error(where + ": index >= n");
         if (index < 0) throw overflow_error(where + ": index < 0");
     }
@@ -84,7 +84,7 @@ void TestSpfaWithFloyd(int N) {
         d[i].resize(N);
         for (int j = 0; j < N; j++) {
             d[i][j] = rand() % 10000;
-            spfa.AddEdge(i, j, d[i][j]);
+            spfa.add_edge(i, j, d[i][j]);
         }
         d[i][i] = 0;
     }
@@ -95,7 +95,7 @@ void TestSpfaWithFloyd(int N) {
                 if (d[i][j] > d[i][k] + d[k][j]) d[i][j] = d[i][k] + d[k][j];
 
     for (int start = 0; start < N; start++) {
-        spfa.Calculate(start);
+        spfa.calculate(start);
         for (int end = 0; end < N; end++)
             if (spfa.distance[end] != d[start][end]) {
                 throw runtime_error("Test failed!");

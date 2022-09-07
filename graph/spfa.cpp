@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include <queue>
+#include <deque>
 
 using namespace std;
 
@@ -21,13 +21,15 @@ class Spfa {
 public:
     int n;
     bool undirected;
+    bool slf;
 
     vector<T> distance;
     vector<bool> visited;
 
-    Spfa(int n, bool undirected = false) {
+    Spfa(int n, bool undirected = false, bool slf = false) {
         this->n = n;
         this->undirected = undirected;
+        this->slf = slf;
         distance.resize(n);
         visited.resize(n);
         edges.resize(n);
@@ -44,27 +46,28 @@ public:
     void calculate(int start) {
         index_sanity_check(start, "Calculate");
 
-        while (!q.empty()) q.pop();
+        while (!dq.empty()) dq.pop_back();
         for (int i = 0; i < n; i++) visited[i] = false;
         distance[start] = 0;
         visited[start] = true;
-        q.push(start);
+        dq.push_back(start);
 
-        while (!q.empty()) {
-            int u = q.front();
-            q.pop();
+        while (!dq.empty()) {
+            int u = dq.front();
+            dq.pop_front();
             for (auto next : edges[u]) relax(u, next.first, next.second);
         }
     }
 private:
-    queue<int> q;
+    deque<int> dq;
     vector<vector<pair<int, T>>> edges;
 
     void relax(int u, int v, T l) {
         if (!visited[v] || distance[v] > distance[u] + l) {
             visited[v] = true;
             distance[v] = distance[u] + l;
-            q.push(v);
+            if (distance[v] < distance[dq.front()]) dq.push_front(v);
+            else dq.push_back(v);
         }
     }
 
@@ -78,7 +81,7 @@ void TestSpfaWithFloyd(int N) {
     srand(time(NULL));
 
     vector<vector<long long>> d(N);
-    Spfa<long long> spfa(N);
+    Spfa<long long> spfa(N, false, true);
 
     for (int i = 0; i < N; i++) {
         d[i].resize(N);

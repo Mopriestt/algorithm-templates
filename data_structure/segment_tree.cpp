@@ -11,12 +11,10 @@ public:
         int l, r, max;
         Node *cl, *cr;
         long long sum;
-    } T[MAX_NODES * 2 + 10];
-    Node *root;
+    } T[MAX_NODES * 2 + 10], root = T;
     int ns = 0;
     
     SegmentTree(vector<int> &maxArray, vector<int> &sumArray) {
-        root = T;
         buildTree(root, 0, maxArray.size() - 1, maxArray, sumArray);
     }
     

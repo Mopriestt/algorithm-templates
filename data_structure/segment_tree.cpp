@@ -11,7 +11,7 @@ public:
         int l, r, max;
         Node *cl, *cr;
         long long sum;
-    } T[MAX_NODES * 2 + 10], root = T;
+    } T[MAX_NODES * 2 + 10], *root = T;
     int ns = 0;
     
     SegmentTree(vector<int> &maxArray, vector<int> &sumArray) {

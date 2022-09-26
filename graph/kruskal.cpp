@@ -38,7 +38,7 @@ public:
 		return ans;
 	}
 private:
-	vector<pair<T, pair<int, int>>> edges;
+	vector<pair<T, pair<int, int> > > edges;
 
 	inline void merge(int u, int v) {
 		father[find(u)] = father[v];

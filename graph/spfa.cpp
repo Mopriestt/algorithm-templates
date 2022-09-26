@@ -60,7 +60,7 @@ public:
     }
 private:
     deque<int> dq;
-    vector<vector<pair<int, T>>> edges;
+    vector<vector<pair<int, T> > > edges;
 
     void relax(int u, int v, T l) {
         if (!visited[v] || distance[v] > distance[u] + l) {
@@ -80,7 +80,7 @@ private:
 void TestSpfaWithFloyd(int N) {
     srand(time(NULL));
 
-    vector<vector<long long>> d(N);
+    vector<vector<long long> > d(N);
     Spfa<long long> spfa(N, false, true);
 
     for (int i = 0; i < N; i++) {

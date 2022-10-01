@@ -3,79 +3,119 @@
 
 using namespace std;
 
-const int MAX_NODES = 100000;
+const int MAX_RANGE = 100000;
+
+struct Node {
+    int l, r, max, val;
+    Node *cl, *cr;
+    long long sum;
+    inline long long getSum() {
+        return sum + 1LL * (r - l + 1) * val;
+    }
+    inline long long getMax() {
+        return max + val;
+    }
+} T[MAX_RANGE * 2 + 10];
 
 class SegmentTree {
 public:
-    struct Node {
-        int l, r, max;
-        Node *cl, *cr;
-        long long sum;
-    } T[MAX_NODES * 2 + 10], *root = T;
+    Node *root = T;
     int ns = 0;
     
-    SegmentTree(vector<int> &maxArray, vector<int> &sumArray) {
-        buildTree(root, 0, maxArray.size() - 1, maxArray, sumArray);
+    SegmentTree(int n) {
+        buildTree(root, 0, n);
     }
     
     pair<int, long long> query(int l, int r) {
         return _query(root, l, r);
     }
+
+    void add(int l, int r, int v) {
+        _add(root, l, r, v);
+    }
 private:
+    void _add(Node *p, int l, int r, int v) {
+        if (l > p -> r || r < p -> l) return;
+        if (l <= p -> l && r >= p -> r) {
+            p -> val += v;
+            return;
+        }
+        push(p);
+        _add(p -> cl, l, r, v);
+        _add(p -> cr, l, r, v);
+        merge(p);
+    }
+
     pair<int, long long> _query(Node *p, int l, int r) {
         if (l > p -> r || r < p -> l) return {0, 0};
-        if (l <= p -> l && r >= p -> r) return {p -> max, p -> sum};
-        auto v1 = _query(p -> cl, l, r), v2 = _query(p -> cr, l, r);
+        if (l <= p -> l && r >= p -> r) return {p -> getMax(), p -> getSum()};
+        push(p);
+        auto v1 = _query(p -> cl, l, r);
+        auto v2 = _query(p -> cr, l, r);
+        merge(p);
         return {max(v1.first, v2.first), v1.second + v2.second};
     }
 
-    inline void update(Node *p) {
-        p -> max = max(p -> cl -> max, p -> cr -> max);
-        p -> sum = p -> cl -> sum + p -> cr -> sum;
+    // Push down
+    inline void push(Node *p) {
+        if (p -> l == p -> r) return;
+        p -> cl -> val += p -> val;
+        p -> cr -> val += p -> val;
+        p -> val = 0;
     }
 
-    void buildTree(Node *p, int l, int r, vector<int> &maxArray, vector<int> &sumArray) {
+    // Merge up
+    inline void merge(Node *p) {
+        p -> max = max(p -> cl -> getMax(), p -> cr -> getMax());
+        p -> sum = p -> cl -> getSum() + p -> cr -> getSum();
+    }
+
+    void buildTree(Node *p, int l, int r) {
         p -> l = l, p -> r = r;
-        if (l == r) {
-            p -> max = maxArray[l], p -> sum = sumArray[l];
-            return;
-        }
+        p -> max = p -> sum = p -> val = 0;
+        if (l == r) return;
         int mid = (l + r) >> 1;
         p -> cl = T + ++ns, p -> cr = T + ++ns;
-        buildTree(p -> cl, l, mid, maxArray, sumArray);
-        buildTree(p -> cr, mid + 1, r, maxArray, sumArray);
-        update(p);
+        buildTree(p -> cl, l, mid);
+        buildTree(p -> cr, mid + 1, r);
     }
 };
 
 void test_segment_tree() {
-    int n = 100000;
+    int n = MAX_RANGE;
     srand(time(NULL));
-    vector<int> maxArray, sumArray;
-    for (int i = 0; i < n; i ++)
-        maxArray.push_back(rand()), sumArray.push_back(rand());
-    SegmentTree tree(maxArray, sumArray);
+    vector<int> a(n, 0);
+    SegmentTree tree(n - 1);
 
-    for (int query = 0; query < 10000; query ++) {
-        int l = rand() % n, r = rand() % n;
-        if (l > r) swap(l, r);
-        auto result = tree.query(l, r);
+    for (int query = 0; query < 100000; query ++) {
+        int op = rand() % 2;
+        int single = rand() % 4;
+        int l = rand() % n, r = (rand() % 5 == 0) ? l : rand() % n;
+        if (r < l) l ^= r ^= l ^= r;
 
-        int max_value = 0;
-        long long sum = 0;
-        for (int i = l; i <= r; i ++) {
-            max_value = max(max_value, maxArray[i]);
-            sum += sumArray[i];
-        }
-        if (max_value != result.first || sum != result.second) {
-            cout<<"Test failed!"<<endl;
-            return;
+        if (op == 0) {
+            // add
+            int v = rand() % 1000;
+            tree.add(l, r, v);
+            for (int i = l; i <= r; i ++) a[i] += v;
+        } else {
+            // query
+            auto res = tree.query(l, r);
+            int mx = 0;
+            long long sum = 0LL;
+            for (int i = l; i <= r; i ++) {
+                mx = max(mx, a[i]);
+                sum += a[i];
+            }
+            if (res.first != mx || res.second != sum) {
+                cout<<"Test failed"<<endl;
+                return;
+            }
         }
     }
     cout<<"Test passed!"<<endl;
 }
 
-// Used for Leetcode 2398.
 int main() {
     test_segment_tree();
     return 0;

@@ -66,7 +66,7 @@ private:
         if (!visited[v] || distance[v] > distance[u] + l) {
             visited[v] = true;
             distance[v] = distance[u] + l;
-            if (slf && distance[v] < distance[dq.front()]) dq.push_front(v);
+            if (slf && !dq.empty() && distance[v] < distance[dq.front()]) dq.push_front(v);
             else dq.push_back(v);
         }
     }

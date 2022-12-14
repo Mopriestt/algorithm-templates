@@ -21,8 +21,8 @@ vector<string> split(string &s, string delimiter) {
 
 int main() {
     string s = "abc.def.egh..   .kkk";
-    cout<<segs.size()<<endl;
     auto segs = split(s, ".");
+    cout<<segs.size()<<endl;
     for (auto _ : segs) cout<<_<<endl;
     return 0;
 }

@@ -8,12 +8,14 @@ void loopSubSet(int n) {
     }
 }
 
+int nextComb(int comb) {
+    int x = comb & -comb, y = comb + x;
+    return ((comb & ~y) / x >> 1) | y;
+}
+
 void loopKSubSet(int n, int k) {
-    int comb = (1 << k) - 1;
-    while (comb < 1 << n) {
+    for (int comb = (1 << k) - 1; comb < 1 << n; comb = nextComb(comb)) {
         cout<<comb<<endl;
-        int x = comb & -comb, y = comb + x;
-        comb = ((comb & ~y) / x >> 1) | y;
     }
 }
 

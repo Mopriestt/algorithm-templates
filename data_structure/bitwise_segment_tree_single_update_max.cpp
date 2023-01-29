@@ -3,12 +3,12 @@
 
 using namespace std;
 
-// Segment tree for range [0, n)
+// Segment tree for range [0, n]
 class SegmentTree {
 public:
     int n;
     vector<int> t;
-    SegmentTree(int n) : n(n) { t.resize(n << 1, 0); }
+    SegmentTree(int _n) : n(_n + 1) { t.resize(n << 1, 0); }
 
     void build() {
         for (int i = n - 1; i > 0; -- i) t[i] = t[i << 1] + t[(i << 1) | 1];

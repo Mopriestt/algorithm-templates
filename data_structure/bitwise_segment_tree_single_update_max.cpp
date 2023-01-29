@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Segment tree for range [0, n)
 class SegmentTree {
 public:
     int n;

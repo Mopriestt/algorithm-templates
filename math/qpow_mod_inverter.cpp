@@ -22,6 +22,21 @@ long long qpow(long long a, long long b) {
     return ret;
 }
 
+// return a / b % M;
+long long divide(long long a, long long b) {
+    return a * qpow(b, M -2) % M;
+}
+
+long long C(long long n, long long m) {
+    long long ret = 1;
+    for (int i = 2; i <= n; i ++) ret = ret * i % M;
+    for (int i = 2; i <= m; i ++) ret = divide(ret, i);
+    for (int i = 2; i <= n - m; i ++) ret = divide(ret, i);
+    return ret;
+}
+
 int main() {
+    cout << C(6, 3) << endl;
+    cout << C(5, 2) << ' ' << C(5, 3) << endl;
     return 0;
 }

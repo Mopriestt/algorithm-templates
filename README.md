@@ -1,2 +1,2 @@
-# Templates
-Algorithms &amp; Data structures templates for competition
+# Algorithm Templates
+Algorithms &amp; data structures templates for algorithm contest

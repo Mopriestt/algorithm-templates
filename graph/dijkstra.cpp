@@ -1,3 +1,4 @@
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -28,6 +29,40 @@ inline void dijkstra(vector<vector<pair<int, int>>> &G, vector<int> &ret) {
     dijkstra(G, ret, 0, G.size());
 }
 
+void test_dijkstra() {
+    srand(time(0));
+    int N = 300;
+    vector<vector<int>> g(N, vector<int>(N, 0));
+    vector<vector<pair<int, int>>> G(N);
+
+    for (int i = 0; i < N; i ++) {
+        for (int j = 0; j < N; j ++) {
+            g[i][j] = rand() % 10000 + rand() % 10000;
+            G[i].push_back({j, g[i][j]});
+        }
+        g[i][i] = 0;
+    }
+
+    for (int k = 0; k < N; k ++)
+        for (int i = 0; i < N; i ++)
+            for (int j = 0; j < N; j ++)
+                if (g[i][k] + g[k][j] < g[i][j]) g[i][j] = g[i][k] + g[k][j];
+    
+    for (int i = 0; i < N; i ++) {
+        vector<int> ret;
+        dijkstra(G, ret, i);
+
+        for (int j = 0; j < N; j ++) {
+            if (ret[j] != g[i][j]) {
+                cout<< "Test failed" <<endl;
+                return;
+            }
+        }
+    }
+    cout << "Test passed" << endl;
+}
+
 int main() {
+    test_dijkstra();
     return 0;
 }

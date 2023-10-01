@@ -3,6 +3,12 @@
 
 using namespace std;
 
+/// @brief Implements the Dijkstra to find the shortest paths in a graph.
+/// @param G The graph represented as an adjacency list where G[u] is a vector of pairs (v, d),
+///          indicating a directed edge from u to v with weight d.
+/// @param ret A vector to store the computed shortest distances from the source vertex 's' to all other vertices.
+/// @param s The source vertex from which shortest paths are calculated.
+/// @param n The total number of vertices in the graph.
 void dijkstra(vector<vector<pair<int, int>>> &G, vector<int> &ret, int s, int n) {
     vector<char> vis(n, 0);
     ret.resize(n, -1);

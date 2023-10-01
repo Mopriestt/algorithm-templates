@@ -12,6 +12,7 @@ Algorithms &amp; data structures templates for algorithm contest
 ## Graph
 - [Dijkstra](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/dijkstra.cpp)
 - [SPFA](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/spfa.cpp)
+- [SPFA SLF optimization](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/spfa_slf.cpp)
 - [Kruskal](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/kruskal.cpp)
 - [Leetcode style graph creation](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/leetcode_create_tree_graph.cpp)
 

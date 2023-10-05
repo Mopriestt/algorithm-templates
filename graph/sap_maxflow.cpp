@@ -47,7 +47,7 @@ public:
         return ret;
     }
 
-    int calculate(int S, int T) {
+    int calculate() {
         d.resize(n);
         vd.resize(n);
         vd[S] = n;
@@ -60,5 +60,8 @@ public:
 };
 
 int main() {
+    Sap sap(2, 0, 1);
+    sap.addedge(0, 1, 1);
+    cout<< sap.calculate() << endl;
     return 0;
 }

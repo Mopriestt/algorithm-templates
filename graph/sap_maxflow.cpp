@@ -49,12 +49,11 @@ public:
 
     int calculate() {
         d.resize(n);
-        vd.resize(n);
+        vd.resize(n + 2);
         vd[S] = n;
         int ans = 0;
 
         while (d[S] < n) ans += dfs(S, oo);
-
         return ans;
     }
 };

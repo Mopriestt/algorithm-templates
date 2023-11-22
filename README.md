@@ -15,6 +15,7 @@ Algorithms &amp; data structures templates for algorithm contest
 - [SPFA SLF optimization](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/spfa_slf.cpp)
 - [Kruskal](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/kruskal.cpp)
 - [SAP Maxflow](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/sap_maxflow.cpp)
+- [Minimum Cost Maxflow](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/min_cost_flow.cpp)
 - [Leetcode style graph creation](https://github.com/Mopriestt/algorithm-templates/blob/main/graph/leetcode_create_tree_graph.cpp)
 
 ## Math

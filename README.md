@@ -22,7 +22,7 @@ Algorithms &amp; data structures templates for algorithm contest
 - [GCD & ExGCD](https://github.com/Mopriestt/algorithm-templates/blob/main/math/gcd.cpp)
 - [Primes](https://github.com/Mopriestt/algorithm-templates/blob/main/math/primes.cpp)
 - [Quick Pow & Mod Inverter](https://github.com/Mopriestt/algorithm-templates/blob/main/math/qpow_mod_inverter.cpp)
-- [Combination](https://github.com/Mopriestt/algorithm-templates/blob/main/math/combination.cpp)
+- [Combination](https://github.com/Mopriestt/algorithm-templates/blob/main/math/qpow_mod_inverter.cpp)
 
 ## Misc
 - [Array K-th smallest](https://github.com/Mopriestt/algorithm-templates/blob/main/misc/arrays.cpp)

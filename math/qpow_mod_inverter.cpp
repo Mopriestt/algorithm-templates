@@ -29,14 +29,26 @@ long long divide(long long a, long long b) {
 
 long long C(long long n, long long m) {
     long long ret = 1;
-    for (int i = 2; i <= n; i ++) ret = ret * i % M;
-    for (int i = 2; i <= m; i ++) ret = divide(ret, i);
-    for (int i = 2; i <= n - m; i ++) ret = divide(ret, i);
+    if (m > n - m) {
+        for (int i = m + 1; i <= n; i ++) ret = ret * i % M;
+        for (int i = 2; i <= n - m; i ++) ret = divide(ret, i);
+    } else {
+        for (int i = n - m + 1; i <= n; i ++) ret = ret * i % M;
+        for (int i = 2; i <= m; i ++) ret = divide(ret, i);
+    }
+    return ret;
+}
+
+
+long long A(long long n, long long m) {
+    long long ret = 1;
+    for (int i = n - m + 1; i <= n; i ++) ret = ret * i % M;
     return ret;
 }
 
 int main() {
     cout << C(6, 3) << endl;
     cout << C(5, 2) << ' ' << C(5, 3) << endl;
+    cout << A(6, 2) << endl;
     return 0;
 }

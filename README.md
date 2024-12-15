@@ -32,6 +32,7 @@ Algorithms &amp; data structures templates for algorithm contest
 - [KMP](https://github.com/Mopriestt/algorithm-templates/blob/main/string/kmp.cpp)
 - [Manacher](https://github.com/Mopriestt/algorithm-templates/blob/main/string/manacher.cpp)
 - [String split](https://github.com/Mopriestt/algorithm-templates/blob/main/string/string_utils.cpp)
+- [Sub hash](https://github.com/Mopriestt/algorithm-templates/blob/main/string/string_hash.cpp)
 - [Trie](https://en.wikipedia.org/wiki/Trie)
     - [children array](https://github.com/Mopriestt/algorithm-templates/blob/main/string/trie_children_array.cpp)
     - [children map](https://github.com/Mopriestt/algorithm-templates/blob/main/string/trie_children_map.cpp)

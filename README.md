@@ -29,7 +29,7 @@ Algorithms &amp; data structures templates for algorithm contest
 - [Bitwise subset enumeration](https://github.com/Mopriestt/algorithm-templates/blob/main/misc/bits.cpp)
 
 ## String
-- [KMP](https://github.com/Mopriestt/algorithm-templates/blob/main/string/kmp.cpp)
+- [KMP](https://github.com/Mopriestt/algorithm-templates/blob/main/string/ext_kmp.cpp)
 - [Manacher](https://github.com/Mopriestt/algorithm-templates/blob/main/string/manacher.cpp)
 - [String split](https://github.com/Mopriestt/algorithm-templates/blob/main/string/string_utils.cpp)
 - [Sub hash](https://github.com/Mopriestt/algorithm-templates/blob/main/string/string_hash.cpp)

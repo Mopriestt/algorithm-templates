@@ -36,4 +36,3 @@ Algorithms &amp; data structures templates for algorithm contest
 - [Trie](https://en.wikipedia.org/wiki/Trie)
     - [children array](https://github.com/Mopriestt/algorithm-templates/blob/main/string/trie_children_array.cpp)
     - [children map](https://github.com/Mopriestt/algorithm-templates/blob/main/string/trie_children_map.cpp)
-- TODO: Z-Function 

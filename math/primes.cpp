@@ -32,12 +32,10 @@ vector<long long> getPrimes(long long n) {
 
 // Returns primes in [l, r]
 vector<long long> getPrimes(long long l, long long r) {
-    if (r < l) {
-        cout<<"getPrimes r < l"<<endl;
-        throw;
-    }
+    if (l < 2) l = 2;
     int n = r - l + 1;
     vector<long long> ret;
+    if (n < 1) return ret;
     vector<bool> f(n, true);
     long long ub = (long long) sqrt(r * 1.0) + 1;
 
